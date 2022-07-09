@@ -54,6 +54,7 @@ locals {
   )
 
   logConfiguration = jsonencode(var.logConfiguration)
+  firelensConfiguration = jsonencode(var.firelensConfiguration)
 
   mountPoints = replace(
     replace(jsonencode(var.mountPoints), "/\"1\"/", "true"),
@@ -102,6 +103,7 @@ data "template_file" "container_definition" {
     environment            = local.environment == "[]" ? "null" : local.environment
     essential              = var.essential ? true : false
     extraHosts             = local.extraHosts == "[]" ? "null" : local.extraHosts
+    firelensConfiguration  = local.firelensConfiguration == "{}" ? "null" : local.firelensConfiguration
     healthCheck            = local.healthCheck == "{}" ? "null" : local.healthCheck
     hostname               = var.hostname == "" ? "null" : var.hostname
     image                  = var.image == "" ? "null" : var.image
