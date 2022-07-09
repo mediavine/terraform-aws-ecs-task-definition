@@ -122,6 +122,12 @@ variable "logConfiguration" {
   type        = any
 }
 
+variable "firelensConfiguration" {
+  default     = {}
+  description = "The log configuration specification for the container"
+  type        = any
+}
+
 variable "memory" {
   default     = 512
   description = "The hard limit (in MiB) of memory to present to the container"

@@ -10,6 +10,7 @@
   "environment": ${environment},
   "essential": ${essential},
   "extraHosts": ${extraHosts},
+  "firelensConfiguration": ${firelensConfiguration},
   "healthCheck": ${healthCheck},
   "hostname": "${hostname}",
   "image": "${image}",
