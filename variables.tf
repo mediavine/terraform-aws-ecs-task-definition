@@ -13,6 +13,15 @@ variable "cpu" {
   type        = number
 }
 
+variable "dependsOn" {
+  type = list(object({
+    containerName = string
+    condition     = string
+  }))
+  description = "The dependencies defined for container startup and shutdown. A container can contain multiple dependencies. When a dependency is defined for container startup, for container shutdown it is reversed. The condition can be one of START, COMPLETE, SUCCESS or HEALTHY"
+  default     = []
+}
+
 variable "disableNetworking" {
   default     = false
   description = "When this parameter is true, networking is disabled within the container"
@@ -52,6 +61,15 @@ variable "environment" {
   default     = []
   description = "The environment variables to pass to a container"
   type        = list(map(string))
+}
+
+variable "environmentFiles" {
+  type = list(object({
+    value = string
+    type  = string
+  }))
+  description = "One or more files containing the environment variables to pass to the container. This maps to the --env-file option to docker run. The file must be hosted in Amazon S3. This option is only available to tasks using the EC2 launch type. This is a list of maps"
+  default     = []
 }
 
 variable "essential" {
@@ -211,6 +229,18 @@ variable "resourceRequirements" {
   default     = []
   description = "The type and amount of a resource to assign to a container"
   type        = list(string)
+}
+
+variable "startTimeout" {
+  type        = number
+  description = "Time duration (in seconds) to wait before giving up on resolving dependencies for a container"
+  default     = null
+}
+
+variable "stopTimeout" {
+  type        = number
+  description = "Time duration (in seconds) to wait before the container is forcefully killed if it doesn't exit normally on its own"
+  default     = null
 }
 
 variable "secrets" {
