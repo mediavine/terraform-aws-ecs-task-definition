@@ -147,7 +147,7 @@ variable "firelensConfiguration" {
 }
 
 variable "memory" {
-  default     = 512
+  default     = 4096
   description = "The hard limit (in MiB) of memory to present to the container"
   type        = number
 }
